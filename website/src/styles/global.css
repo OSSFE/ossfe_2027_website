@@ -1,0 +1,26 @@
+@import url(https://db.onlinewebfonts.com/c/06594b8e23c284f33b51e05d8145f62d?family=Coolvetica+V2);
+
+@import 'tailwindcss';
+
+@theme {
+  --color-ossfe-blue: #333F50;
+  --color-ossfe-dark: #26303D;
+  --color-ossfe-darker: #1E2731;
+  --color-accent: #FFB347;
+  --color-accent-hover: #FFA21E;
+  --color-ink: #FFFFFF;
+  --color-ink-muted: #E2E8F0;
+  --color-ink-faint: #94A3B8;
+
+  --font-display: 'Coolvetica', system-ui, sans-serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+@font-face {
+  font-family: 'Coolvetica';
+  src: url('/fonts/coolvetica.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+html { background-color: #333F50; }

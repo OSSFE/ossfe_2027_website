@@ -1,0 +1,20 @@
+---
+import '../styles/global.css';
+const { title = 'OSSFE 2027 — Open Source Software for Fusion Energy' } = Astro.props;
+---
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content="OSSFE 2027 — the conference for open-source software in fusion energy. Madison, Wisconsin, June 2027." />
+    <!-- Open Graph / social cards -->
+    <meta property="og:title" content={title} />
+    <meta property="og:image" content="/media/hero-poster.jpg" />
+    <link rel="icon" href="/favicon.svg" />
+  </head>
+  <body class="bg-ossfe-blue font-body text-ink antialiased">
+    <slot />
+  </body>
+</html>

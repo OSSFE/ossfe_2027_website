@@ -1,0 +1,77 @@
+---
+const {
+  title = 'OSSFE 2027',
+  subtitle = 'Open Source Software for Fusion Energy',
+  location = 'Madison, Wisconsin · June 2027',
+} = Astro.props;
+---
+
+<section class="relative h-screen w-full overflow-hidden bg-ossfe-blue">
+  <!-- Static poster: always painted instantly; sole image on mobile / reduced-motion -->
+  <img
+    src="/media/hero-poster.jpg"
+    alt="Moments from OSSFE 2026"
+    class="absolute inset-0 h-full w-full object-cover"
+  />
+
+  <!-- Video: hidden on small screens & when user prefers reduced motion (see <style>) -->
+  <video
+    class="hero-video absolute inset-0 h-full w-full object-cover"
+    autoplay
+    muted
+    loop
+    playsinline
+    poster="/media/hero-poster.jpg"
+    preload="auto"
+    aria-hidden="true"
+  >
+    <source src="/media/hero-2026.webm" type="video/webm" />
+    <source src="/media/hero-2026.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Legibility overlay: OSSFE blue gradient -->
+  <div
+    class="absolute inset-0"
+    style="background: linear-gradient(180deg, rgba(51,63,80,0.55) 0%, rgba(38,48,61,0.75) 100%);"
+  ></div>
+
+  <!-- Content -->
+  <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+    <h1 class="font-display text-6xl tracking-wide text-ink md:text-8xl">{title}</h1>
+    <p class="mt-4 max-w-2xl font-body text-lg text-ink-muted md:text-2xl">{subtitle}</p>
+    <p class="mt-2 font-body text-base text-ink-faint md:text-lg">{location}</p>
+
+    <div class="mt-10 flex flex-col gap-4 sm:flex-row">
+      <a
+        href="#register"
+        class="rounded-full bg-accent px-8 py-3 font-body font-semibold text-ossfe-darker transition hover:bg-accent-hover"
+      >
+        Register
+      </a>
+      <a
+        href="#cfp"
+        class="rounded-full border border-ink/40 px-8 py-3 font-body font-semibold text-ink transition hover:border-ink hover:bg-ink/10"
+      >
+        Submit a talk
+      </a>
+    </div>
+
+    <!-- scroll cue -->
+    <div class="absolute bottom-8 animate-bounce text-ink-faint">↓</div>
+  </div>
+</section>
+
+<style>
+  /* Show video by default (desktop). It sits above the poster <img>. */
+  .hero-video { display: block; }
+
+  /* Mobile: drop the video, keep the lightweight poster image. */
+  @media (max-width: 768px) {
+    .hero-video { display: none; }
+  }
+
+  /* Accessibility: honour reduced-motion — static image only. */
+  @media (prefers-reduced-motion: reduce) {
+    .hero-video { display: none; }
+  }
+</style>

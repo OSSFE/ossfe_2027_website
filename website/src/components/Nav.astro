@@ -1,0 +1,35 @@
+---
+const links = [
+  { href: '#about', label: 'About' },
+  { href: '#cfp', label: 'CFP' },
+  { href: '#program', label: 'Program' },
+  { href: '#sponsors', label: 'Sponsors' },
+];
+---
+<nav id="nav" class="fixed top-0 z-50 w-full transition-colors duration-300">
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <a href="/" class="font-display text-2xl text-ink">OSSFE</a>
+    <div class="hidden items-center gap-8 md:flex">
+      {links.map((l) => (
+        <a href={l.href} class="font-body text-ink-muted transition hover:text-ink">{l.label}</a>
+      ))}
+      <a href="#register" class="rounded-full bg-accent px-5 py-2 font-semibold text-ossfe-darker transition hover:bg-accent-hover">
+        Register
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Fill nav background once scrolled past the hero.
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    if (window.scrollY > window.innerHeight - 80) {
+      nav?.classList.add('bg-ossfe-dark', 'shadow-lg');
+    } else {
+      nav?.classList.remove('bg-ossfe-dark', 'shadow-lg');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+</script>
