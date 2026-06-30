@@ -4,6 +4,7 @@ const {
   subtitle = 'Open Source Software for Fusion Energy',
   location = 'Madison, Wisconsin · June 2027',
 } = Astro.props;
+import OssfeLogo from './OssfeLogo.astro';
 ---
 
 <section class="relative h-screen w-full overflow-hidden bg-ossfe-blue">
@@ -38,12 +39,15 @@ const {
   <!-- Content -->
   <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
 
-    <!-- Logo instead of text headline -->
-    <img
-      src="/images/ossfe light transparent cropped.svg"
-      alt="OSSFE — Open Source Software for Fusion Energy"
-      class="w-[80%] max-w-xl drop-shadow-lg"
-    />
+    <div class="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center">
+      <div class="w-72 drop-shadow-lg md:w-[28rem]">
+        <OssfeLogo />
+      </div>
+
+      <p class="mt-6 font-display text-3xl tracking-widest text-ink md:text-5xl">2027</p>
+      <p class="mt-3 font-body text-base text-ink-muted md:text-xl">Madison, Wisconsin · June 2027</p>
+      <!-- CTAs ... -->
+    </div>
 
     <!-- 2027 + location below -->
     <p class="mt-6 font-display text-3xl tracking-widest text-ink md:text-5xl">2027</p>
