@@ -1,164 +1,63 @@
 ---
-// src/components/Sponsors.astro
+// src/components/Sponsors.astro — HOME PAGE TEASER (links to /sponsors)
+
+// Just the headline tier prices for a quick glance.
 const tiers = [
-  {
-    name: 'Silver',
-    price: '$2,000',
-    slots: '',
-    includes: null,
-    perks: [
-      'Logo on website & sponsor banner',
-      'Job board listing',
-      'Distribute merchandise in attendee bags',
-      '1 conference pass',
-    ],
-    featured: false,
-  },
-  {
-    name: 'Gold',
-    price: '$5,000',
-    slots: '',
-    includes: 'Silver',
-    perks: [
-      'Expo booth',
-      'Attendee list & submitted résumés (opt-in)',
-      '1 student scholarship in your name',
-      '2 conference passes',
-    ],
-    featured: true,
-  },
-  {
-    name: 'Diamond',
-    price: '$10,000',
-    slots: 'only 3',
-    includes: 'Gold',
-    perks: [
-      'Premium logo placement + top billing',
-      'Logo on attendee badges & lanyards',
-      'Opportunity to offer a tutorial',
-      '2 student scholarships in your name',
-      '3 conference passes',
-    ],
-    featured: false,
-  },
+  { name: 'Silver', price: '$2,000' },
+  { name: 'Gold', price: '$5,000', featured: true },
+  { name: 'Diamond', price: '$10,000' },
 ];
 
-const confirmedSponsors = [];
+const confirmedSponsors = []; // add { name, logo } as they sign
 ---
 
 <section id="sponsors" class="bg-ossfe-dark py-24">
-  <div class="mx-auto max-w-6xl px-6">
+  <div class="mx-auto max-w-5xl px-6 text-center">
 
-    <!-- Header -->
-    <div class="text-center">
-      <p class="font-body text-sm uppercase tracking-widest text-accent">Partner with us</p>
-      <h2 class="mt-3 font-display text-4xl text-ink md:text-5xl">Sponsor OSSFE 2027</h2>
-      <p class="mx-auto mt-4 max-w-2xl font-body text-ink-muted">
-        OSSFE brings together the people building the open-source software behind fusion energy —
-        researchers, national labs, and fusion startups. Sponsoring puts your brand in front of a
-        highly technical, hard-to-reach audience and supports the tools the community depends on.
-      </p>
-    </div>
+    <p class="font-body text-sm uppercase tracking-widest text-accent">Partner with us</p>
+    <h2 class="mt-3 font-display text-4xl text-ink md:text-5xl">Sponsor OSSFE 2027</h2>
+    <p class="mx-auto mt-4 max-w-2xl font-body text-ink-muted">
+      Put your brand in front of the open-source fusion community — researchers, national labs
+      and startups — and help sustain the tools the field depends on.
+    </p>
 
-    <!-- Why sponsor (3 reasons) -->
-    <div class="mt-14 grid gap-6 md:grid-cols-3">
-      {[
-        { icon: '🎯', title: 'Reach', body: 'Direct access to fusion software engineers, scientists & decision-makers.' },
-        { icon: '🧲', title: 'Talent', body: 'Connect with and recruit specialised technical talent.' },
-        { icon: '🌱', title: 'Impact', body: 'Fund travel grants & scholarships — support the next generation.' },
-      ].map((r) => (
-        <div class="rounded-2xl bg-ossfe-blue/60 p-6 ring-1 ring-white/5">
-          <div class="text-3xl">{r.icon}</div>
-          <h3 class="mt-3 font-display text-xl text-ink">{r.title}</h3>
-          <p class="mt-2 font-body text-sm text-ink-faint">{r.body}</p>
+    <!-- Quick tier glance -->
+    <div class="mt-12 grid gap-4 sm:grid-cols-3">
+      {tiers.map((t) => (
+        <div class={`rounded-2xl p-6 ring-1 transition
+          ${t.featured ? 'bg-ossfe-blue ring-accent/60' : 'bg-ossfe-blue/50 ring-white/10'}`}>
+          <div class="font-display text-xl text-ink">{t.name}</div>
+          <div class="mt-1 font-display text-2xl text-accent">{t.price}</div>
         </div>
       ))}
     </div>
 
-    <!-- Tiers -->
-    <div class="mt-16 grid gap-6 md:grid-cols-3">
-    {tiers.map((t) => (
-        <div class={`relative flex flex-col rounded-2xl p-8 ring-1 transition
-        ${t.featured
-            ? 'bg-ossfe-blue ring-accent/60 md:-translate-y-2'
-            : 'bg-ossfe-blue/50 ring-white/10'}`}>
-        {t.featured && (
-            <span class="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-4 py-1 text-xs font-semibold text-ossfe-darker">
-            Most popular
-            </span>
-        )}
-
-        <h3 class="font-display text-2xl text-ink">{t.name}</h3>
-        <div class="mt-2 flex items-baseline gap-2">
-            <span class="font-display text-3xl text-ink">{t.price}</span>
-            {t.slots && <span class="font-body text-xs text-accent">{t.slots}</span>}
-        </div>
-
-        <!-- Cumulative line -->
-        {t.includes && (
-            <p class="mt-5 rounded-lg bg-accent/10 px-3 py-2 font-body text-sm font-semibold text-accent">
-            ✦ Everything in {t.includes}, plus:
-            </p>
-        )}
-        {!t.includes && (
-            <p class="mt-5 font-body text-sm text-ink-faint">Includes:</p>
-        )}
-
-        <ul class="mt-4 space-y-3">
-            {t.perks.map((p) => (
-            <li class="flex items-start gap-2 font-body text-sm text-ink-muted">
-                <span class="text-accent">✓</span><span>{p}</span>
-            </li>
-            ))}
-        </ul>
-        </div>
-    ))}
-    </div>
-
-    <!-- À la carte teaser -->
-    <p class="mt-8 text-center font-body text-sm text-ink-faint">
-      À la carte options also available — welcome reception, coffee breaks, lanyards, travel-grant pool & more.
-    </p>
-
-    <!-- Primary CTA -->
-    <div class="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-      <a href="/sponsor-prospectus.pdf"
-         class="rounded-full bg-accent px-8 py-3 font-body font-semibold text-ossfe-darker transition hover:bg-accent-hover">
-        Download the prospectus
-      </a>
-      <a href="mailto:sponsors@ossfe.org"
-         class="rounded-full border border-ink/30 px-8 py-3 font-body font-semibold text-ink transition hover:border-ink hover:bg-ink/10">
-        Talk to us → sponsors@ossfe.org
-      </a>
-    </div>
-
-    <!-- Confirmed sponsors / coming-soon state -->
-    <div class="mt-20 border-t border-white/10 pt-12">
-      <h3 class="text-center font-display text-2xl text-ink">Our 2027 sponsors</h3>
-
+    <!-- Confirmed sponsors / coming-soon -->
+    <div class="mt-14">
       {confirmedSponsors.length > 0 ? (
-        <div class="mt-8 flex flex-wrap items-center justify-center gap-10">
+        <div class="flex flex-wrap items-center justify-center gap-10">
           {confirmedSponsors.map((s) => (
             <img src={s.logo} alt={s.name}
-                 class="h-12 opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0" />
+                 class="h-10 opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0" />
           ))}
         </div>
       ) : (
-        <div class="mt-8 text-center">
-          <p class="font-body text-ink-faint">
-            Sponsor line-up coming soon.
-            <span class="text-ink-muted">Your logo could be here.</span>
-          </p>
-          <!-- Skeleton placeholders to imply "spaces available" -->
-          <div class="mt-8 flex flex-wrap items-center justify-center gap-6">
-            {Array.from({ length: 5 }).map(() => (
-              <div class="flex h-16 w-36 items-center justify-center rounded-xl border border-dashed border-white/15 bg-white/5">
-                <span class="font-body text-xs text-ink-faint">Your logo</span>
-              </div>
-            ))}
-          </div>
-        </div>
+        <p class="font-body text-ink-faint">
+          Sponsor line-up coming soon — <span class="text-ink-muted">your logo could be here.</span>
+        </p>
       )}
+    </div>
+
+    <!-- CTA to full page -->
+    <div class="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <a href="/sponsors"
+         class="rounded-full bg-accent px-8 py-3 font-body font-semibold text-ossfe-darker transition hover:bg-accent-hover">
+        See sponsorship options →
+      </a>
+      <a href="mailto:sponsors@ossfe.org"
+         class="rounded-full border border-ink/30 px-8 py-3 font-body font-semibold text-ink transition hover:border-ink hover:bg-ink/10">
+        sponsors@ossfe.org
+      </a>
     </div>
 
   </div>

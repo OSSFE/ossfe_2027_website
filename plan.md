@@ -130,6 +130,7 @@ npm run dev
 
 # build
 npm run build
+```
 
 Tailwind 4 reminder: global.css must begin with @import 'tailwindcss'; and use a @theme { ... } block for the palette/fonts — not the old @tailwind base/components/utilities directives. Check version with npm list astro tailwindcss.
 
