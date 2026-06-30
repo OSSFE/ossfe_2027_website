@@ -18,6 +18,8 @@ const stats = [
   { value: '60+',  label: 'Talks & posters' },
   { value: '12',   label: 'Tutorials' },
 ];
+
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="gallery" class="bg-ossfe-blue py-24">
@@ -40,7 +42,7 @@ const stats = [
       >
         {photos.map((p, i) => (
           <img
-            src={p.src}
+            src={`${base}${p.src.replace(/^\//, '')}`}
             alt={p.alt}
             loading={i === 0 ? 'eager' : 'lazy'}
             data-slide={i}

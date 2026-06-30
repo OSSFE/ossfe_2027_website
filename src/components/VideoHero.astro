@@ -5,12 +5,13 @@ const {
   location = 'Madison, Wisconsin · June 2027',
 } = Astro.props;
 import OssfeLogo from './OssfeLogo.astro';
+const base = import.meta.env.BASE_URL;
 ---
 
 <section class="relative h-screen w-full overflow-hidden bg-ossfe-blue">
   <!-- Static poster: always painted instantly; sole image on mobile / reduced-motion -->
   <img
-    src="/media/hero-poster.jpg"
+    src={`${base}media/hero-poster.jpg`}
     alt="Moments from OSSFE 2026"
     class="absolute inset-0 h-full w-full object-cover"
   />
@@ -22,12 +23,12 @@ import OssfeLogo from './OssfeLogo.astro';
     muted
     loop
     playsinline
-    poster="/media/hero-poster.jpg"
+    poster={`${base}media/hero-poster.jpg`}
     preload="auto"
     aria-hidden="true"
   >
-    <source src="/media/hero-2026.webm" type="video/webm" />
-    <source src="/media/hero-2026.mp4" type="video/mp4" />
+    <source src={`${base}media/hero-2026.webm`} type="video/webm" />
+    <source src={`${base}media/hero-2026.mp4`} type="video/mp4" />
   </video>
 
   <!-- Legibility overlay: OSSFE blue gradient -->

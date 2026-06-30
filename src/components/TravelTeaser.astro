@@ -6,6 +6,7 @@ const infoCards = [
   { icon: '📄', title: 'Visa & invitation letters', body: 'Travelling internationally? We provide invitation letters on request.' },
   { icon: '👨‍👩‍👧', title: 'Family & accessibility', body: 'Family support, a nursing room and accessible facilities — just ask.' },
 ];
+const base = import.meta.env.BASE_URL;
 ---
 
 <section id="travel" class="bg-ossfe-dark py-24">
@@ -33,7 +34,7 @@ const infoCards = [
         </div>
 
         <div class="mt-10">
-          <a href="/travel"
+          <a href={`${base}travel`}
              class="inline-flex items-center gap-2 rounded-full bg-accent px-8 py-3 font-body font-semibold text-ossfe-darker transition hover:bg-accent-hover">
             Plan your trip →
           </a>
@@ -43,7 +44,7 @@ const infoCards = [
       {/* RIGHT — Madison image */}
       <div class="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-white/10">
         <img
-          src="/images/madison.jpg"
+          src={`${base}images/madison.jpg`}
           alt="Madison, Wisconsin"
           loading="lazy"
           class="h-full w-full object-cover"

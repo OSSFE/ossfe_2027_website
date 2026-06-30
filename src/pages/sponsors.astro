@@ -4,6 +4,8 @@ import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
+const base = import.meta.env.BASE_URL;
+
 // ────────────────────────────────────────────────
 //  EDIT YOUR DATA HERE  (placeholders = 2026 / projected)
 // ────────────────────────────────────────────────
@@ -74,7 +76,7 @@ const max = Math.max(...growth.map((g) => g.value));
         the tools the whole field relies on.
       </p>
       <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-        <a href="/sponsor-prospectus.pdf" class="rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover">Download PDF</a>
+        <a href={`${base}sponsor-prospectus.pdf`} class="rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover">Download PDF</a>
         <a href="mailto:sponsors@ossfe.org" class="rounded-full border border-ink/30 px-8 py-3 font-semibold text-ink transition hover:border-ink hover:bg-ink/10">sponsors@ossfe.org</a>
       </div>
     </div>
@@ -232,7 +234,7 @@ const max = Math.max(...growth.map((g) => g.value));
       <h2 class="font-display text-4xl text-ink">Ready to partner with OSSFE?</h2>
       <p class="mt-4 font-body text-ink-muted">Tiers are limited and assigned first-come, first-served. Let’s talk.</p>
       <div class="mt-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-        <a href="/sponsor-prospectus.pdf" class="rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover">Download the prospectus</a>
+        <a href={`${base}sponsor-prospectus.pdf`} class="rounded-full bg-accent px-8 py-3 font-semibold text-ossfe-darker transition hover:bg-accent-hover">Download the prospectus</a>
         <a href="mailto:sponsors@ossfe.org" class="rounded-full border border-ink/30 px-8 py-3 font-semibold text-ink transition hover:border-ink hover:bg-ink/10">Email sponsors@ossfe.org</a>
       </div>
     </div>
