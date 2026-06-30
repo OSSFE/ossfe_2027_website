@@ -1,2 +1,75 @@
-<section class="bg-ossfe-dark py-12">
+---
+// src/components/FinalCTA.astro
+// Newsletter: point the form `action` at your provider (listmonk / Mailchimp / Buttondown…).
+---
+
+<section id="register" class="relative overflow-hidden bg-ossfe-dark py-24">
+
+  {/* subtle accent glow */}
+  <div class="pointer-events-none absolute -top-24 left-1/2 h-96 w-96 -translate-x-1/2 rounded-full bg-accent/10 blur-3xl"></div>
+
+  <div class="relative mx-auto max-w-3xl px-6 text-center">
+
+    <h2 class="font-display text-4xl text-ink md:text-5xl">Join us in Madison</h2>
+    <p class="mx-auto mt-4 max-w-xl font-body text-lg text-ink-muted">
+      Be part of the open-source fusion community in June 2027 — present your work,
+      learn from others, and help shape the tools the field depends on.
+    </p>
+
+    {/* Primary CTAs */}
+    <div class="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+      <a href="#"
+         class="rounded-full bg-accent px-8 py-3 font-body font-semibold text-ossfe-darker transition hover:bg-accent-hover">
+        Register (coming soon)
+      </a>
+      <a href="#cfp"
+         class="rounded-full border border-ink/30 px-8 py-3 font-body font-semibold text-ink transition hover:border-ink hover:bg-ink/10">
+        Submit a talk
+      </a>
+    </div>
+
+    {/* Newsletter signup */}
+    <div id="newsletter" class="mx-auto mt-16 max-w-md scroll-mt-24">
+    <p class="font-display text-xl text-ink">Get notified</p>
+    <p class="mt-2 font-body text-sm text-ink-faint">
+        Registration isn’t open yet. Leave your email and we’ll tell you the moment the
+        CFP and tickets go live.
+    </p>
+
+    <form
+        action="https://github.us9.list-manage.com/subscribe/post?u=5678d3a3e9f2ff97af6f010df&amp;id=9594bf47d2&amp;f_id=00f7e9e3f0"
+        method="post"
+        target="_blank"
+        class="mt-6 flex flex-col gap-3 sm:flex-row"
+    >
+        <input
+        type="email"
+        name="EMAIL"
+        required
+        placeholder="you@example.com"
+        class="flex-1 rounded-full border border-white/15 bg-ossfe-blue/60 px-5 py-3 font-body text-ink placeholder:text-ink-faint focus:border-accent focus:outline-none focus:ring-1 focus:ring-accent"
+        />
+
+        {/* Honeypot: real users never fill this; bots do. Keep it off-screen. */}
+        <div aria-hidden="true" style="position:absolute; left:-5000px;">
+        <input type="text" name="b_5678d3a3e9f2ff97af6f010df_9594bf47d2" tabindex="-1" value="" />
+        </div>
+
+        <button
+        type="submit"
+        name="subscribe"
+        class="rounded-full bg-accent px-6 py-3 font-body font-semibold text-ossfe-darker transition hover:bg-accent-hover"
+        >
+        Notify me
+        </button>
+    </form>
+
+    <p class="mt-3 font-body text-xs text-ink-faint">
+        No spam — just OSSFE 2027 announcements. Unsubscribe anytime.
+    </p>
+    </div>
+
+
+
+  </div>
 </section>

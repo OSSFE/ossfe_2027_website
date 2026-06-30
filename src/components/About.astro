@@ -1,2 +1,60 @@
-<section class="bg-ossfe-blue py-12">
+---
+// src/components/About.astro
+const pillars = [
+  {
+    icon: '🌐',
+    title: 'Open Source',
+    body: 'Fusion is too important to build behind closed doors. OSSFE champions open, reusable, well-tested software — so the whole field can build on each other’s work instead of reinventing it.',
+  },
+  {
+    icon: '🔬',
+    title: 'Fusion Science',
+    body: 'From plasma physics and materials to neutronics, tritium and reactor engineering — we bring together the codes and the people pushing fusion energy toward reality.',
+  },
+  {
+    icon: '🤝',
+    title: 'Community',
+    body: 'Researchers, national labs, startups and students in one room. OSSFE is where maintainers meet users, collaborations start, and the next generation finds its footing.',
+  },
+];
+---
+
+<section id="about" class="bg-ossfe-blue py-24">
+  <div class="mx-auto max-w-6xl px-6">
+
+    <!-- Heading + intro -->
+    <div class="mx-auto max-w-3xl text-center">
+      <p class="font-body text-sm uppercase tracking-widest text-accent">About the conference</p>
+      <h2 class="mt-3 font-display text-4xl text-ink md:text-5xl">
+        Open Source Software for Fusion Energy
+      </h2>
+      <p class="mt-6 font-body text-lg leading-relaxed text-ink-muted">
+        OSSFE is the community conference for the software powering fusion research and
+        commercialisation. Over three days in Madison, we’ll share tools, swap ideas across
+        institutions and companies, and grow the open-source ecosystem that the field
+        increasingly depends on — through talks, tutorials, posters and panels.
+      </p>
+    </div>
+
+    <!-- Three pillars -->
+    <div class="mt-16 grid gap-6 md:grid-cols-3">
+      {pillars.map((p) => (
+        <div class="rounded-2xl bg-ossfe-dark/60 p-8 ring-1 ring-white/5 transition hover:ring-accent/40">
+          <div class="text-3xl">{p.icon}</div>
+          <h3 class="mt-4 font-display text-xl text-ink">{p.title}</h3>
+          <p class="mt-3 font-body text-sm leading-relaxed text-ink-faint">{p.body}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Accent quote / mission band -->
+    <figure class="mx-auto mt-16 max-w-3xl border-l-2 border-accent pl-6 text-center md:text-left">
+      <blockquote class="font-display text-2xl leading-snug text-ink md:text-3xl">
+        “Software is now as central to fusion as the hardware. Building it in the open
+        accelerates the whole field.”
+      </blockquote>
+      <figcaption class="mt-3 font-body text-sm text-ink-faint">— The OSSFE organising team</figcaption>
+    </figure>
+
+  </div>
 </section>

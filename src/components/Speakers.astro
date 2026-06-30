@@ -1,2 +1,57 @@
-<section class="bg-ossfe-dark py-12">
+---
+// src/components/Speakers.astro
+const speakers = [];
+const placeholderCount = 8;
+---
+
+<section id="speakers" class="bg-ossfe-dark py-24">
+  <div class="mx-auto max-w-6xl px-6">
+
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-body text-sm uppercase tracking-widest text-accent">Speakers</p>
+      <h2 class="mt-3 font-display text-4xl text-ink md:text-5xl">More to be announced</h2>
+      <p class="mt-4 font-body text-ink-muted">
+        Our invited speakers and program will be revealed after the Call for Proposals.
+        Want to be on this list? <a href="#cfp" class="text-accent underline-offset-4 hover:underline">Submit a talk.</a>
+      </p>
+    </div>
+
+    {speakers.length > 0 ? (
+      <div class="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+        {speakers.map((s) => (
+          <div class="text-center">
+            <img src={s.photo} alt={s.name}
+                 class="mx-auto h-32 w-32 rounded-full object-cover ring-2 ring-accent/40" />
+            <h3 class="mt-4 font-display text-lg text-ink">{s.name}</h3>
+            <p class="font-body text-sm text-ink-faint">{s.role}</p>
+          </div>
+        ))}
+      </div>
+    ) : (
+      <div class="relative mt-16">
+        {/* Greyed-out placeholder grid */}
+        <div class="grid gap-8 opacity-40 grayscale sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: placeholderCount }).map(() => (
+            <div class="flex flex-col items-center">
+              <div class="flex h-32 w-32 items-center justify-center rounded-full bg-white/10 ring-1 ring-white/10">
+                <svg class="h-16 w-16 text-white/30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6Z" />
+                </svg>
+              </div>
+              <div class="mt-4 h-3 w-24 rounded bg-white/15"></div>
+              <div class="mt-2 h-2 w-16 rounded bg-white/10"></div>
+            </div>
+          ))}
+        </div>
+
+        {/* overlay badge */}
+        <div class="pointer-events-none absolute inset-0 flex items-center justify-center">
+          <span class="rounded-full bg-ossfe-blue/90 px-6 py-3 font-display text-lg text-ink ring-1 ring-accent/40 backdrop-blur">
+            Coming soon
+          </span>
+        </div>
+      </div>
+    )}
+
+  </div>
 </section>

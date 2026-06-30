@@ -1,2 +1,100 @@
-<section class="bg-ossfe-dark py-12">
+---
+// src/components/Gallery.astro
+const photos = [
+  { src: '/images/gallery/2026-01.jpg', alt: 'Keynote talk at OSSFE 2026' },
+  { src: '/images/gallery/2026-02.jpg', alt: 'Attendees networking' },
+  { src: '/images/gallery/2026-03.jpg', alt: 'Hands-on tutorial session' },
+  { src: '/images/gallery/2026-04.jpg', alt: 'Poster session' },
+  { src: '/images/gallery/2026-05.jpg', alt: 'Panel discussion' },
+  { src: '/images/gallery/2026-06.jpg', alt: 'Conference venue' },
+  { src: '/images/gallery/2026-07.jpg', alt: 'Coffee break conversations' },
+  { src: '/images/gallery/2026-08.jpg', alt: 'Group photo' },
+];
+
+// Stats from OSSFE 2026 (edit values)
+const stats = [
+  { value: '120+', label: 'Attendees' },
+  { value: '30+',  label: 'Countries' },
+  { value: '60+',  label: 'Talks & posters' },
+  { value: '12',   label: 'Tutorials' },
+];
+---
+
+<section id="gallery" class="bg-ossfe-blue py-24">
+  <div class="mx-auto max-w-6xl px-6">
+
+    <div class="mx-auto max-w-2xl text-center">
+      <p class="font-body text-sm uppercase tracking-widest text-accent">Moments</p>
+      <h2 class="mt-3 font-display text-4xl text-ink md:text-5xl">OSSFE 2026 in numbers</h2>
+      <p class="mt-4 font-body text-ink-muted">
+        A look back at last year — and a taste of what’s coming to Madison in 2027.
+      </p>
+    </div>
+
+    <div class="mt-16 grid items-center gap-10 lg:grid-cols-2">
+
+      {/* LEFT — auto-playing carousel */}
+      <div
+        id="gallery-carousel"
+        class="relative aspect-[4/3] overflow-hidden rounded-2xl ring-1 ring-white/10"
+      >
+        {photos.map((p, i) => (
+          <img
+            src={p.src}
+            alt={p.alt}
+            loading={i === 0 ? 'eager' : 'lazy'}
+            data-slide={i}
+            class={`carousel-slide absolute inset-0 h-full w-full object-cover transition-opacity duration-1000 ${i === 0 ? 'opacity-100' : 'opacity-0'}`}
+          />
+        ))}
+
+        {/* gradient + dots */}
+        <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-ossfe-darker/60 via-transparent to-transparent"></div>
+        <div class="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+          {photos.map((_, i) => (
+            <span data-dot={i} class={`h-2 w-2 rounded-full transition ${i === 0 ? 'bg-accent' : 'bg-white/40'}`}></span>
+          ))}
+        </div>
+      </div>
+
+      {/* RIGHT — 2x2 stats grid */}
+      <div class="grid grid-cols-2 gap-4 sm:gap-6">
+        {stats.map((s) => (
+          <div class="flex flex-col items-center justify-center rounded-2xl bg-ossfe-dark/60 p-8 text-center ring-1 ring-white/5 transition hover:ring-accent/40">
+            <div class="font-display text-4xl text-accent md:text-5xl">{s.value}</div>
+            <div class="mt-2 font-body text-sm text-ink-faint">{s.label}</div>
+          </div>
+        ))}
+      </div>
+
+    </div>
+
+    <div class="mt-12 text-center">
+      <a href="https://www.youtube.com/watch?v=pcuDrO1bBdU"
+         target="_blank" rel="noopener"
+         class="inline-flex items-center gap-2 rounded-full border border-ink/30 px-8 py-3 font-body font-semibold text-ink transition hover:border-ink hover:bg-ink/10">
+        ▶ Watch the 2026 recap
+      </a>
+    </div>
+
+  </div>
 </section>
+
+<script>
+  const root = document.getElementById('gallery-carousel');
+  if (root && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const slides = root.querySelectorAll('.carousel-slide');
+    const dots = root.parentElement.querySelectorAll('[data-dot]');
+    let current = 0;
+
+    setInterval(() => {
+      slides[current].classList.replace('opacity-100', 'opacity-0');
+      dots[current]?.classList.replace('bg-accent', 'bg-white/40');
+
+      current = (current + 1) % slides.length;
+
+      slides[current].classList.replace('opacity-0', 'opacity-100');
+      dots[current]?.classList.replace('bg-white/40', 'bg-accent');
+    }, 3500); // ms per slide
+  }
+</script>
