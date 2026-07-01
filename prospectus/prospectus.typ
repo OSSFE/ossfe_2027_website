@@ -83,35 +83,47 @@
   #text(fill: faint, size: 8pt)[#q.source]
 ]
 
+// rounded, cropped photo band (from OSSFE 2026), tinted to blend with the dark theme
+#let phototint = rgb(30, 39, 49, 90)
+#let photoband(src, h) = box(width: 100%, height: h, radius: 10pt, clip: true)[
+  #place(top + left, image(src, width: 100%, height: 100%, fit: "cover"))
+  #place(top + left, box(width: 100%, height: 100%, fill: phototint))
+]
+
 
 // ════════════════════════ COVER ════════════════════════
 #page(fill: darker, margin: 0pt)[
-  #align(center + horizon)[
-    #block(width: 78%)[
-      #image("../public/images/ossfe light transparent.svg", width: 55%)
-      #v(26pt)
-      #eyebrow("Sponsor Prospectus")
-      #v(10pt)
-      #text(fill: ink, size: 40pt, weight: "bold")[Partner with #meta.event]
-      #v(14pt)
-      #text(fill: muted, size: 12pt)[
-        OSSFE is the conference for the open-source software powering fusion
-        energy. Sponsoring connects your brand with a highly technical,
-        hard-to-reach community, and helps sustain the tools the whole field
-        relies on.
+  // full-bleed group photo band at the bottom, tinted to blend with the dark theme
+  #place(bottom + center, image("img/cover.jpg", width: 100%, height: 8.6cm, fit: "cover"))
+  #place(bottom + center, box(width: 100%, height: 8.6cm, fill: phototint))
+  #place(bottom + center, dy: -8.6cm, line(length: 100%, stroke: 2pt + accent))
+  // cover content, centred in the region above the photo (leave a gap above the band)
+  #block(width: 100%, height: 18.5cm)[
+    #align(center + horizon)[
+      #block(width: 80%)[
+        #image("../public/images/ossfe light transparent.svg", width: 52%)
+        #v(24pt)
+        #eyebrow("Sponsor Prospectus")
+        #v(10pt)
+        #text(fill: ink, size: 40pt, weight: "bold")[Partner with #meta.event]
+        #v(14pt)
+        #text(fill: muted, size: 12pt)[
+          OSSFE is the conference for the open-source software powering fusion
+          energy. Sponsoring connects your brand with a highly technical,
+          hard-to-reach community, and helps sustain the tools the whole field
+          relies on.
+        ]
+        #v(18pt)
+        #text(fill: accent, size: 11pt, weight: "semibold")[
+          #meta.location  ·  #meta.dates
+        ]
+        #v(4pt)
+        #text(fill: faint, size: 9pt)[#meta.organiser]
+        #v(4pt)
+        #text(fill: faint, size: 10pt)[#meta.contact  ·  ossfe.org]
       ]
-      #v(20pt)
-      #text(fill: accent, size: 11pt, weight: "semibold")[
-        #meta.location  ·  #meta.dates
-      ]
-      #v(4pt)
-      #text(fill: faint, size: 9pt)[#meta.organiser]
-      #v(4pt)
-      #text(fill: faint, size: 10pt)[#meta.contact]
     ]
   ]
-  #place(bottom + center, dy: -1.4cm,
-    text(fill: faint, size: 8pt)[ossfe.org  ·  All amounts in #meta.currency])
 ]
 
 // ════════════════════════ WHY + NUMBERS ════════════════════════
@@ -142,8 +154,11 @@
 #grid(columns: (1fr, 1fr, 1fr), gutter: 8pt, rows: (2.6cm, 2.6cm),
   ..data.feedback.map(s => statcard(s)))
 
-#v(14pt)
+#v(12pt)
 #quotecard(data.quotes.at(0))
+
+#v(12pt)
+#photoband("img/talk.jpg", 4cm)
 
 #pagebreak()
 
@@ -239,14 +254,14 @@
     #text(fill: muted, size: 8.5pt)[#e.stat]
   ]))
 
-#v(16pt)
+#v(12pt)
 #h2[Where attendees come from]
 #v(2pt)
 #text(fill: faint, size: 9pt)[Home countries of attendees across the 2025 and 2026 editions (#data.countries.len() countries).]
-#v(10pt)
+#v(8pt)
 
-#let mapW = 17.4cm
-#let mapH = 8.7cm
+#let mapW = 16cm
+#let mapH = 8cm
 #let year2025 = rgb(255, 179, 71, 150)
 #let year2026 = rgb(79, 209, 197, 150)
 #let bubble(cx, cy, count, fillc, strokec) = if count > 0 {
@@ -254,7 +269,7 @@
   place(top + left, dx: cx - r, dy: cy - r, circle(radius: r, fill: fillc, stroke: 0.4pt + strokec))
 }
 
-#box(width: mapW, height: mapH)[
+#align(center, box(width: mapW, height: mapH)[
   #place(top + left, image("world-equirect.svg", width: mapW, height: mapH))
   #for c in data.countries {
     let cx = (c.lng + 180) / 360 * mapW
@@ -268,7 +283,7 @@
       bubble(cx, cy, c.y2025, year2025, rgb("#FFB347"))
     }
   }
-]
+])
 #v(8pt)
 #grid(columns: (auto, auto), gutter: 20pt,
   [#box(fill: rgb("#FFB347"), width: 9pt, height: 9pt, radius: 5pt) #h(3pt) #text(fill: muted, size: 9pt)[2025 (online) · 219 registrants]],
@@ -277,8 +292,11 @@
 #v(6pt)
 #text(fill: faint, size: 8pt)[Bubble area is proportional to the number of attendees from each country.]
 
-#v(14pt)
+#v(12pt)
 #quotecard(data.quotes.at(3))
+
+#v(10pt)
+#photoband("img/panel.jpg", 3.8cm)
 
 #pagebreak()
 
@@ -321,6 +339,11 @@
     ]
     #v(6pt)
     #text(fill: faint, size: 8pt)[#data.prizeNote]
+    #v(8pt)
+    #align(center, box(width: 6.4cm, height: 6.4cm, radius: 10pt, clip: true)[
+      #place(top + left, image("img/crowd.jpg", width: 100%, height: 100%, fit: "cover"))
+      #place(top + left, box(width: 100%, height: 100%, fill: phototint))
+    ])
   ])
 
 #pagebreak()
@@ -333,7 +356,10 @@
   #v(8pt)
 ]
 
-#v(6pt)
+#v(14pt)
+#photoband("img/network.jpg", 5.2cm)
+
+#v(12pt)
 #box(fill: darker, radius: 10pt, inset: 18pt, width: 100%)[
   #align(center)[
     #text(fill: ink, size: 15pt, weight: "bold")[Ready to partner with OSSFE?]
