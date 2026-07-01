@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import GoogleAnalytics from '../components/GoogleAnalytics.astro';
 const { title = 'OSSFE 2027 — Open Source Software for Fusion Energy' } = Astro.props;
 const base = import.meta.env.BASE_URL;
 ---
@@ -14,6 +15,7 @@ const base = import.meta.env.BASE_URL;
     <meta property="og:title" content={title} />
     <meta property="og:image" content={new URL(`${base}media/hero-poster.jpg`, Astro.site)} />
     <link rel="icon" href={`${base}favicon.svg?v=3`} type="image/svg+xml" />
+    <GoogleAnalytics measurementId="G-7TN8952B6L" />
   </head>
   <body class="bg-ossfe-blue font-body text-ink antialiased">
     <slot />
