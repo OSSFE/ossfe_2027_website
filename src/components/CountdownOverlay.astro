@@ -1,0 +1,75 @@
+---
+
+import OssfeLogo from './OssfeLogo.astro';
+interface Props {
+  /** ISO 8601 date/time, e.g. "2027-01-15T12:00:00Z" */
+  revealDate: string;
+  title?: string;
+  message?: string;
+}
+
+const {
+  revealDate,
+  message = "The location of the 2027 edition will be revealed in…",
+} = Astro.props;
+---
+
+<div id="countdown-overlay" data-reveal={revealDate}>
+  <div class="countdown-inner">
+    <div class="w-72 drop-shadow-lg md:w-[28rem]">
+      <OssfeLogo />
+    </div>
+    <p>{message}</p>
+    <div id="countdown-timer">--</div>
+  </div>
+</div>
+
+<style>
+  #countdown-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #0b1f3a; /* your brand colour */
+    color: white;
+    text-align: center;
+    font-family: system-ui, sans-serif;
+  }
+  #countdown-overlay h1 { font-size: 3rem; margin: 0 0 0.5rem; }
+  #countdown-timer {
+    font-size: 2.5rem;
+    font-variant-numeric: tabular-nums;
+    margin-top: 1rem;
+  }
+  :global(body.locked) { overflow: hidden; }
+</style>
+
+<script>
+  const overlay = document.getElementById("countdown-overlay");
+  const timerEl = document.getElementById("countdown-timer");
+  const revealDate = new Date(overlay?.dataset.reveal ?? "");
+
+  function update() {
+    const diff = revealDate.getTime() - Date.now();
+
+    if (diff <= 0) {
+      overlay?.remove();
+      document.body.classList.remove("locked");
+      clearInterval(interval);
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    if (timerEl) timerEl.textContent = `${d}d ${h}h ${m}m ${s}s`;
+  }
+
+  document.body.classList.add("locked");
+  update();
+  const interval = setInterval(update, 1000);
+</script>
